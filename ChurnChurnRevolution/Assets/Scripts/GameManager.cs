@@ -9,9 +9,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Slider _player1ProgressBar;
     [SerializeField] private Slider _player2ProgressBar;
 
+    private Player _winningPlayer = null;
+    
     private void Start()
     {
-        // Setup players
         _player1.Initialize(
             new KeyCode[] { KeyCode.D, KeyCode.W, KeyCode.A, KeyCode.S },
             _player1ProgressBar
@@ -24,16 +25,29 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // Check if either player has won
+        if (_winningPlayer != null)
+        {
+            return;
+        }
+        
         if (_player1.HasWon)
         {
             Debug.Log("Player 1 Wins!");
             Time.timeScale = 0f;
+            _winningPlayer = _player1;
+            TriggerWinUI();
         }
         else if (_player2.HasWon)
         {
             Debug.Log("Player 2 Wins!");
             Time.timeScale = 0f;
+            _winningPlayer = _player2;
+            TriggerWinUI();
         }
+    }
+
+    private void TriggerWinUI()
+    {
+        // What happens if we win?
     }
 }

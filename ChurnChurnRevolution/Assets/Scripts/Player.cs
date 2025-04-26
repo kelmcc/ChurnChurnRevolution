@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
     private Slider progressBar;
 
     private float progress;
-    private float decayRate = 0.2f; // How fast the bar falls
-    private float fillAmount = 0.1f; // How much each correct input fills the bar
+    private float decayRate = 0.1f; // How fast the bar falls
+    private float fillAmount = 0.02f; // How much each correct input fills the bar
 
     public bool HasWon => progress >= 1f;
 
@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
             progress += fillAmount;
             currentChainIndex = (currentChainIndex + inputChain.Length - 1) % inputChain.Length;
         }
-        Debug.Log($"Progress: {progress}, Current chain index: {currentChainIndex}");
+        //Debug.Log($"Progress: {progress}, Current chain index: {currentChainIndex}");
     }
 
     private void DecayProgress()
