@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cfea9f582554240b9b21f662b4230ac7
+guid: ac938b09ab4024677923003b67127670
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -112,7 +112,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -675,7 +675,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -684,7 +684,30 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Win-Screen_0: -877044145734058860
+      Win-Screen_1: 376417507676843575
+      Win-Screen_10: 8581679490291728981
+      Win-Screen_11: 6065217644068651304
+      Win-Screen_12: -2543412753351523432
+      Win-Screen_13: -5251577060728418133
+      Win-Screen_14: 4745674732924172579
+      Win-Screen_15: -7935603460794634434
+      Win-Screen_16: 3200440898957896821
+      Win-Screen_17: 5358276963306288004
+      Win-Screen_18: -2647293517800047754
+      Win-Screen_19: -8389824573224176021
+      Win-Screen_2: 160396526815643190
+      Win-Screen_20: -2094729171345719053
+      Win-Screen_21: -2741494718785598515
+      Win-Screen_22: -4932066869696137220
+      Win-Screen_3: 9049812929803001832
+      Win-Screen_4: 503575700265992329
+      Win-Screen_5: 4103481714552704551
+      Win-Screen_6: -419098548864032824
+      Win-Screen_7: 4263543668982253421
+      Win-Screen_8: 4259685618226869325
+      Win-Screen_9: 6222905045607474755
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
