@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cow-Standing_0: -3309319288675763913
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

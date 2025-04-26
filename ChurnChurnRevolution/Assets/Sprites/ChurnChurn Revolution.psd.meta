@@ -184,7 +184,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ChurnChurn Revolution_0: -2219746173925066850
+      ChurnChurn Revolution_1: -8008698492088928266
+      ChurnChurn Revolution_2: -4512653683463161191
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
