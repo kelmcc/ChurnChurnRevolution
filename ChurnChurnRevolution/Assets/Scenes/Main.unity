@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15104f72244459da9cbab0128248d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sfx: {fileID: 11400000, guid: fa4b4f18435d8407cb1dcbe985f8b39e, type: 2}
   _cowPrefab: {fileID: 7424556391784055751, guid: 2e2aba4683f6943eeb10fbe43d764fcc, type: 3}
   _cowParent: {fileID: 575918352}
   _minBounds: {x: -8, y: -5}

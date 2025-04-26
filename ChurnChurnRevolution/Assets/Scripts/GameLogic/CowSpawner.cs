@@ -1,8 +1,11 @@
+using SoundManager;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class CowSpawner : MonoBehaviour
 {
+    [SerializeField] private EffectSoundBank _sfx;
+    
     [Header("Cow Settings")]
     [SerializeField] private Transform _cowPrefab;
     [SerializeField] private Transform _cowParent;
@@ -38,6 +41,7 @@ public class CowSpawner : MonoBehaviour
     {
         Transform cow = Instantiate(_cowPrefab, _cowParent);
         cow.gameObject.SetActive(false);
+        _sfx.Play();
         return cow;
     }
 
