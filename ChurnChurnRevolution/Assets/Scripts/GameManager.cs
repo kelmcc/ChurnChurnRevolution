@@ -1,27 +1,39 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    // PLayer 1 movement controls
-    public const KeyCode _player1MoveLeft = KeyCode.A;
-    public const KeyCode _player1MoveRight = KeyCode.D;
-    public const KeyCode _player1Up = KeyCode.W;
-    public const KeyCode _player1Down = KeyCode.S;
-    
-    // Player 2 movement controls
-    public const KeyCode _player2MoveLeft = KeyCode.LeftArrow;
-    public const KeyCode _player2MoveRight = KeyCode.RightArrow;
-    public const KeyCode _player2Up = KeyCode.UpArrow;
-    public const KeyCode _player2Down = KeyCode.DownArrow;
-    
-    
-    void Start()
+    [SerializeField] private Player _player1;
+    [SerializeField] private Player _player2;
+
+    [SerializeField] private Slider _player1ProgressBar;
+    [SerializeField] private Slider _player2ProgressBar;
+
+    private void Start()
     {
-        
+        // Setup players
+        _player1.Initialize(
+            new KeyCode[] { KeyCode.D, KeyCode.W, KeyCode.A, KeyCode.S },
+            _player1ProgressBar
+        );
+        _player2.Initialize(
+            new KeyCode[] { KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow },
+            _player2ProgressBar
+        );
     }
 
-    void Update()
+    private void Update()
     {
-        
+        // Check if either player has won
+        if (_player1.HasWon)
+        {
+            Debug.Log("Player 1 Wins!");
+            Time.timeScale = 0f;
+        }
+        else if (_player2.HasWon)
+        {
+            Debug.Log("Player 2 Wins!");
+            Time.timeScale = 0f;
+        }
     }
 }
