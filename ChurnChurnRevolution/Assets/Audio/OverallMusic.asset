@@ -180,4 +180,5 @@ MonoBehaviour:
   _cooldown: 0
   _outputMixer: {fileID: 0}
   _clipSelection: 3
-  _audioClips: []
+  _audioClips:
+  - {fileID: 8300000, guid: 8956e2a12c7196d4a818d68f4c530f36, type: 3}
