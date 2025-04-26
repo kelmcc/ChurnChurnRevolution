@@ -61,7 +61,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Houses_0: 3222940646981861373
+      Houses_1: 8879565848803906064
+      Houses_2: -5327402328362567308
+      Houses_3: 4967704794591779700
+      Houses_4: -7867709004336942830
+      Houses_5: 8266825074386914413
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
