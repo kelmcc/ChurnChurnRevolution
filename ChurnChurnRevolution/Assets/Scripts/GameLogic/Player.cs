@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     [SerializeField] private EffectSoundBank _sfx;
-    [SerializeField] private Image _characterImage;
+    [SerializeField] private Image _armsImage;
     [SerializeField] private Sprite[] _movementSprites;
     [SerializeField] private List<GameObject> _butterBuildUp;
     
@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 
     private void UpdateFX()
     {
-        _characterImage.sprite = _movementSprites[currentChainIndex];
+        _armsImage.sprite = _movementSprites[currentChainIndex];
         _sfx.Play();
     }
 
