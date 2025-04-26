@@ -170,7 +170,7 @@ MonoBehaviour:
       m_RotationOrder: 4
   _volumeRange:
     _min: 0.5
-    _max: 0.5
+    _max: 0.8
   _pitchRange:
     _min: 1
     _max: 1
@@ -178,6 +178,6 @@ MonoBehaviour:
     _min: 1
     _max: 10
   _cooldown: 0
-  _outputMixer: {fileID: 0}
+  _outputMixer: {fileID: 24300002, guid: 828cc3ec5f1bf400cbf6ed1c49ac15ee, type: 2}
   _clipSelection: 1
   _audioClips: []
