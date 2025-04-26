@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using SoundManager;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,9 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private EffectSoundBank _sfx;
     [SerializeField] private Image _characterImage;
-    [SerializeField] private Sprite[] _sprites;
+    [SerializeField] private Sprite[] _movementSprites;
+    [SerializeField] private List<GameObject> _butterBuildUp;
+    
     private KeyCode[] inputChain;
     private int currentChainIndex;
     private Slider progressBar;
@@ -80,7 +83,7 @@ public class Player : MonoBehaviour
 
     private void UpdateFX()
     {
-        _characterImage.sprite = _sprites[currentChainIndex];
+        _characterImage.sprite = _movementSprites[currentChainIndex];
         _sfx.Play();
     }
 }
