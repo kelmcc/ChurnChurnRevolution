@@ -1,8 +1,10 @@
+using SoundManager;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private EffectSoundBank _sfx;
     [SerializeField] private Image _characterImage;
     [SerializeField] private Sprite[] _sprites;
     private KeyCode[] inputChain;
@@ -79,5 +81,6 @@ public class Player : MonoBehaviour
     private void UpdateFX()
     {
         _characterImage.sprite = _sprites[currentChainIndex];
+        _sfx.Play();
     }
 }

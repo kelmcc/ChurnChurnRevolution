@@ -1,8 +1,11 @@
+using SoundManager;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private EffectSoundBank _music;
+
     [SerializeField] private Player _player1;
     [SerializeField] private Player _player2;
 
@@ -13,6 +16,9 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
+        EffectSoundInstance instance = _music.Play();
+        instance.IsLooping = true;
+        
         _player1.Initialize(
             new KeyCode[] { KeyCode.D, KeyCode.W, KeyCode.A, KeyCode.S },
             _player1ProgressBar
