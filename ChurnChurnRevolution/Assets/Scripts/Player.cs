@@ -3,13 +3,15 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Image _characterImage;
+    [SerializeField] private Sprite[] _sprites;
     private KeyCode[] inputChain;
     private int currentChainIndex;
     private Slider progressBar;
 
     private float progress;
     private float decayRate = 0.1f; // How fast the bar falls
-    private float fillAmount = 0.02f; // How much each correct input fills the bar
+    private float fillAmount = 0.01f; // How much each correct input fills the bar
 
     public bool HasWon => progress >= 1f;
 
@@ -45,12 +47,14 @@ public class Player : MonoBehaviour
         {
             progress += fillAmount;
             currentChainIndex = (currentChainIndex + 1) % inputChain.Length;
+            UpdateFX();
         }
         else if (Input.GetKeyDown(inputChain[(currentChainIndex + inputChain.Length - 1) % inputChain.Length]))
         {
             // Allow reverse order
             progress += fillAmount;
             currentChainIndex = (currentChainIndex + inputChain.Length - 1) % inputChain.Length;
+            UpdateFX();
         }
         //Debug.Log($"Progress: {progress}, Current chain index: {currentChainIndex}");
     }
@@ -70,5 +74,10 @@ public class Player : MonoBehaviour
         {
             progressBar.value = progress;
         }
+    }
+
+    private void UpdateFX()
+    {
+        _characterImage.sprite = _sprites[currentChainIndex];
     }
 }
