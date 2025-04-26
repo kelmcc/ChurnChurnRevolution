@@ -16,7 +16,7 @@ public class CloudSpawner : MonoBehaviour
     [SerializeField] private Vector2 _maxKillBounds = new Vector2(8f, 5f);
 
     [Header("Spawn Timing")]
-    [SerializeField] private float _spawnInterval = 2f; // Time between spawns
+    [SerializeField] private float _spawnInterval = 2f; 
     private float _spawnTimer;
     
     private ObjectPool<Transform> _cloudPool;
