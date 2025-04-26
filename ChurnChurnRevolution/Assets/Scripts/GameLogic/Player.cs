@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     private float progress;
     private float decayRate = 0.1f; // How fast the bar falls
-    private float fillAmount = 0.018f; // How much each correct input fills the bar
+    private float fillAmount = 0.02f; // How much each correct input fills the bar
 
     public bool HasWon => progress >= 1f;
 
