@@ -2,7 +2,6 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
-.utmp/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -60,7 +59,6 @@ sysinfo.txt
 *.apk
 *.aab
 *.unitypackage
-*.unitypackage.meta
 *.app
 
 # Crashlytics generated file
@@ -72,5 +70,23 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-ChurnChurnRevolution/.idea
+/idea/
+*.DS_Store
+.idea
+Assets/Plugins/Feel/FeelDemos
+Assets/Plugins/Feel/FeelDemosHDRP
+Assets/Plugins/Feel/FeelDemosURP
+Assets/Plugins/Feel/NiceVibrations/Demo
+Assets/Plugins/Feel/NiceVibrations/OlderVersions
+Assets/Plugins/Feel/NiceVibrations/Demo.meta
+Assets/Plugins/Feel/MMTools/Demos
+Assets/Plugins/Feel/MMFeedbacks/Demos
+Assets/Plugins/Feel/MMFeedbacks/Demos.meta
+Assets/Plugins/Feel/MMTools/Demos.meta
+Assets/Plugins/Feel/FeelDemos.meta
+Assets/Plugins/Feel/FeelDemosHDRP.meta
+Assets/Plugins/Feel/FeelDemosURP.meta
+Assets/AddressableAssetsData/link.xml
+Assets/AddressableAssetsData/link.xml.meta
+!/ShroomAndGloom.sln.DotSettings
 ChurnChurnRevolution/Library
