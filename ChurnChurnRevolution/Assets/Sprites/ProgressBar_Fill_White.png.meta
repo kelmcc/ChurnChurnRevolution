@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 93f0a89d3dcc246b4b50623379323187
+guid: 9a7bf7ce44774405eade1b0b96e0582d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3066907419105858591
-    second: Milk-Pale_0
+      213: 889077302427364667
+    second: ProgressBar_Fill_White_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Milk-Pale_0
+      name: ProgressBar_Fill_White_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 4
-        width: 155
-        height: 200
+        x: 9
+        y: 9
+        width: 67
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1eb6f2593f72075d0800000000000000
-      internalID: -3066907419105858591
+      spriteID: b3dab059813a65c00800000000000000
+      internalID: 889077302427364667
       vertices: []
       indices: 
       edges: []

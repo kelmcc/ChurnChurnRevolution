@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 93f0a89d3dcc246b4b50623379323187
+guid: 018f675a0b4e7463f89c795358249afe
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3066907419105858591
-    second: Milk-Pale_0
+      213: -747859043211156414
+    second: ProgressBar_Progress_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Milk-Pale_0
+      name: ProgressBar_Progress_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 4
-        width: 155
-        height: 200
+        x: 10
+        y: 686
+        width: 65
+        height: 49
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1eb6f2593f72075d0800000000000000
-      internalID: -3066907419105858591
+      spriteID: 244e55b99221f95f0800000000000000
+      internalID: -747859043211156414
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5098b4861021644f889bac11dd4308cd
     internalID: 0
     vertices: []
     indices: 
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ProgressBar_Progress_0: -747859043211156414
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
