@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     public void Initialize(KeyCode[] chain, Slider assignedProgressBar)
     {
+        TurnOffAllSplashes();
+        
         inputChain = chain;
         progressBar = assignedProgressBar;
         currentChainIndex = 0;
@@ -33,11 +35,20 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void TurnOffAllSplashes()
+    {
+        foreach (var splash in _butterBuildUp)
+        {
+            splash.SetActive(false);
+        }
+    }
+
     private void Update()
     {
         HandleInput();
         DecayProgress();
         UpdateProgressBar();
+        UpdateButterSplash();
     }
 
     private void HandleInput()
@@ -86,4 +97,22 @@ public class Player : MonoBehaviour
         _characterImage.sprite = _movementSprites[currentChainIndex];
         _sfx.Play();
     }
+
+    private void UpdateButterSplash()
+    {
+        int numberOfSplashes = Mathf.Clamp((int)(progress * _butterBuildUp.Count), 0, _butterBuildUp.Count);
+
+        for (int i = 0; i < _butterBuildUp.Count; i++)
+        {
+            if (i < numberOfSplashes)
+            {
+                _butterBuildUp[i].SetActive(true);
+            }
+            else
+            {
+                _butterBuildUp[i].SetActive(false);
+            }
+        }
+    }
+
 }
