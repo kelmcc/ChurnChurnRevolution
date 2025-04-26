@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
         
         if (_player1.HasWon)
         {
+            _player1.PleaseStop = true;
             Debug.Log("Player 1 Wins!");
             Time.timeScale = 0f;
             _winningPlayer = _player1;
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
         }
         else if (_player2.HasWon)
         {
+            _player2.PleaseStop = true;
             Debug.Log("Player 2 Wins!");
             Time.timeScale = 0f;
             _winningPlayer = _player2;
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     private void TriggerWinUI()
     {
+        _winningPlayer.ShowWinState();
         // What happens if we win?
     }
 }

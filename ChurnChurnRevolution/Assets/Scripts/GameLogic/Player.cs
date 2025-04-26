@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Image _armsImage;
     [SerializeField] private Sprite[] _movementSprites;
     [SerializeField] private List<GameObject> _butterBuildUp;
+    [SerializeField] private GameObject _winState;
     
     private KeyCode[] inputChain;
     private int currentChainIndex;
@@ -19,9 +20,12 @@ public class Player : MonoBehaviour
     private float fillAmount = 0.02f; // How much each correct input fills the bar
 
     public bool HasWon => progress >= 1f;
+    public bool PleaseStop = false;
 
     public void Initialize(KeyCode[] chain, Slider assignedProgressBar)
     {
+        _winState.SetActive(false);
+
         TurnOffAllSplashes();
         
         inputChain = chain;
@@ -45,6 +49,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (PleaseStop)
+        {
+            return;
+        }
+        
         HandleInput();
         DecayProgress();
         UpdateProgressBar();
@@ -113,6 +122,12 @@ public class Player : MonoBehaviour
                 _butterBuildUp[i].SetActive(false);
             }
         }
+    }
+    
+    public void ShowWinState()
+    {
+        _winState.SetActive(true);
+        _armsImage.gameObject.SetActive(false);
     }
 
 }
