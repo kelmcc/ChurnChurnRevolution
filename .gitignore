@@ -90,3 +90,6 @@ Assets/AddressableAssetsData/link.xml
 Assets/AddressableAssetsData/link.xml.meta
 !/ShroomAndGloom.sln.DotSettings
 ChurnChurnRevolution/Library
+ChurnChurnRevolution/Logs
+ChurnChurnRevolution/Temp
+ChurnChurnRevolution/obj
