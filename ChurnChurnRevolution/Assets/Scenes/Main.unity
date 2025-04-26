@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06273d16cadfc4796a6436b0e6ffb8fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _music: {fileID: 11400000, guid: 344df0f2085ce4ac784e4fcfecba82af, type: 2}
   _player1: {fileID: 1561964690}
   _player2: {fileID: 180012132}
   _player1ProgressBar: {fileID: 868175362}
@@ -318,6 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426ed3aed37c4e63bb27557261caef31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sfx: {fileID: 11400000, guid: 1e473ffbc7db94516b5a46a79a214c9e, type: 2}
   _characterImage: {fileID: 1493979342}
   _sprites:
   - {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
@@ -1554,6 +1556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426ed3aed37c4e63bb27557261caef31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sfx: {fileID: 11400000, guid: 1e473ffbc7db94516b5a46a79a214c9e, type: 2}
   _characterImage: {fileID: 1083076476}
   _sprites:
   - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
