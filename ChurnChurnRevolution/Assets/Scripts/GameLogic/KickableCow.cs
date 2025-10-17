@@ -1,4 +1,5 @@
 using System;
+using SoundManager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ public class KickableCow : MonoBehaviour, IKickable
     [SerializeField] private float reachThreshold = 0.5f;
     [SerializeField] private float flingForce = 10f;
 
+    [SerializeField] private EffectSoundBank _sfx;
     public Action<Player> OnCowReachingTarget;
 
     private bool _isFlyingAway = false;
@@ -36,7 +38,8 @@ public class KickableCow : MonoBehaviour, IKickable
         _targetedPlayer = targetPlayer;
         _kickTo = targetPlayer.HeadTarget;
         _isFlyingAway = false;
-
+        _sfx.Play();
+        
         if (_rigidbody != null)
         {
             _rigidbody.isKinematic = true;
