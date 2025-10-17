@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
 
     public void Initialize(KeyCode[] chain, Slider assignedProgressBar)
     {
+        _kickCollider.enabled = false;
         _winState.SetActive(false);
 
         TurnOffAllSplashes();

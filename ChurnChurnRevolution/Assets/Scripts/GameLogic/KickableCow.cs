@@ -10,9 +10,8 @@ public class KickableCow : MonoBehaviour, IKickable
     [SerializeField] private Image _image;
     [SerializeField] private Sprite _kickedSprite;
 
-    [Header("Targeting")]
-    [SerializeField] private Transform _kickTo;
-    [SerializeField] private Player _targetedPlayer;
+    private Transform _kickTo;
+    private Player _targetedPlayer;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
