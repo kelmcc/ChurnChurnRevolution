@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite _kickSprite;
     [SerializeField] private List<GameObject> _butterBuildUp;
     [SerializeField] private GameObject _winState;
+    [SerializeField] private Player _opponent;
+    public Transform HeadTarget;
 
     private KeyCode[] inputChain;
     private int currentChainIndex;
@@ -198,7 +200,8 @@ public class Player : MonoBehaviour
             IKickable kickable = other.GetComponent<IKickable>();
             if (kickable != null)
             {
-                kickable.OnKicked(this);
+                
+                kickable.OnKicked(_opponent);
             }
 
             TurnOffKick();

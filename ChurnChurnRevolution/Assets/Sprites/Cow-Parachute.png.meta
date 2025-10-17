@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cow-Parachute_0: 4665386383914895196
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
