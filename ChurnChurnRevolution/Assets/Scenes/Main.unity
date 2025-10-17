@@ -396,8 +396,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 100, y: 100, z: 100}
-  m_Center: {x: -360.99, y: 0, z: 0}
+  m_Size: {x: 228.5, y: 176.2, z: 100}
+  m_Center: {x: -495.9, y: -232.1, z: 0}
 --- !u!1 &198106375
 GameObject:
   m_ObjectHideFlags: 0
@@ -2657,8 +2657,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 100, y: 100, z: 100}
-  m_Center: {x: 360.99, y: 0, z: 0}
+  m_Size: {x: 228.5, y: 176.2, z: 100}
+  m_Center: {x: 465.2, y: -232.1, z: 0}
 --- !u!1 &1633532166
 GameObject:
   m_ObjectHideFlags: 0
@@ -3269,7 +3269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cowPrefab: {fileID: 4099946358301742117, guid: 52f349b9249944d2c8c228391c5dd589, type: 3}
-  spawnInterval: 10
+  spawnInterval: 5
   spawnAreaSize: {x: 1, y: 1, z: 0}
   minBounds: {x: -12, y: -10, z: 85}
   maxBounds: {x: 12, y: 10, z: 95}
