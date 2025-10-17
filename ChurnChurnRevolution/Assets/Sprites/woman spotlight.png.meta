@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      woman spotlight_0: 1979173544662616242
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
