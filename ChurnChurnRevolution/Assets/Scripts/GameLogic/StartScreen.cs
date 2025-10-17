@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class StartScreen : MonoBehaviour
 {
-    [SerializeField] private float requiredTime = 2f;
-    [SerializeField] private int requiredKeyCount = 3;
+    [SerializeField] private float _requiredTime = 2f;
+    [SerializeField] private int _requiredKeyCount = 3;
 
     private readonly HashSet<KeyCode> _pressedKeys = new HashSet<KeyCode>();
     private float _timer;
@@ -24,7 +24,7 @@ public class StartScreen : MonoBehaviour
             {
                 if (_pressedKeys.Count == 0)
                 {
-                    _timer = requiredTime;
+                    _timer = _requiredTime;
                 }
 
                 _pressedKeys.Add(key);
@@ -40,7 +40,7 @@ public class StartScreen : MonoBehaviour
             }
         }
 
-        if (_pressedKeys.Count >= requiredKeyCount)
+        if (_pressedKeys.Count >= _requiredKeyCount)
         {
             LoadNextScene();
         }

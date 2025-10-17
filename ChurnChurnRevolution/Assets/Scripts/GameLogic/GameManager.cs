@@ -19,9 +19,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _win1;
     [SerializeField] private GameObject _win2;
     [SerializeField] private GameObject _win3;
+    
+    [SerializeField] private Transitions _transitions;
+
+    private void Awake()
+    {
+        _transitions.OnTransOutComplete += () => { Debug.LogError("Trans out Complete");};
+        _transitions.OnTransInComplete += () => { Debug.LogError("Trans in Complete");};
+    }
 
     private void Start()
     {
+        _transitions.TransitionOut();
+        
         EffectSoundInstance instance = _music.Play();
         instance.IsLooping = true;
 
