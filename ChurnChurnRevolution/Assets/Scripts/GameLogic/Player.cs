@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private EffectSoundBank _sfx;
     [SerializeField] private EffectSoundBank _kickSfx;
+    [SerializeField] private EffectSoundBank _StunnedSfx;
     [SerializeField] private Image _armsImage;
     [SerializeField] private Image _bodyImage;
     [SerializeField] private Collider _kickCollider;
@@ -161,6 +162,7 @@ public class Player : MonoBehaviour
         isStunned = true;
         currentStunTimer = _config.StunDuration;
         StunnedAnimation.SetActive(true);
+        _StunnedSfx.Play();
     }
     
     private void TurnOffStun()
@@ -239,7 +241,6 @@ public class Player : MonoBehaviour
 
     public void TurnOffKick()
     {
-        _bodyImage.sprite = _defaultSprite;
         _kickCollider.enabled = false;
     }
 
@@ -258,6 +259,7 @@ public class Player : MonoBehaviour
         else if (currentKickTimeOut > 0f)
         {
             currentKickTimeOut -= Time.deltaTime;
+            _bodyImage.sprite = _defaultSprite;
         }
     }
 

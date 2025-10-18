@@ -233,7 +233,7 @@ MonoBehaviour:
   _player2ProgressBar: {fileID: 436559535}
   _playerConfig:
     StunDuration: 2.5
-    KickDuration: 0.2
+    KickDuration: 0.3
     KickTimeOutDuration: 1
   _winBG: {fileID: 1800988087}
   _win1: {fileID: 198106375}
@@ -358,6 +358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sfx: {fileID: 11400000, guid: 1e473ffbc7db94516b5a46a79a214c9e, type: 2}
   _kickSfx: {fileID: 0}
+  _StunnedSfx: {fileID: 0}
   _armsImage: {fileID: 1522568912}
   _bodyImage: {fileID: 1493979342}
   _kickCollider: {fileID: 180012133}
@@ -379,7 +380,6 @@ MonoBehaviour:
   _opponent: {fileID: 1561964690}
   HeadTarget: {fileID: 1748258445}
   StunnedAnimation: {fileID: 1531146469}
-  KickInput: 323
   PleaseStop: 0
 --- !u!65 &180012133
 BoxCollider:
@@ -1442,7 +1442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &633858205
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2815,7 +2815,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sfx: {fileID: 11400000, guid: 1e473ffbc7db94516b5a46a79a214c9e, type: 2}
-  _kickSfx: {fileID: 0}
+  _kickSfx: {fileID: 11400000, guid: fd7ef7c3d353846239653de6332002a3, type: 2}
+  _StunnedSfx: {fileID: 11400000, guid: 12c50ff269dc1476cafa30ab9e9a7553, type: 2}
   _armsImage: {fileID: 2013314822}
   _bodyImage: {fileID: 1083076476}
   _kickCollider: {fileID: 1561964691}
@@ -2837,7 +2838,6 @@ MonoBehaviour:
   _opponent: {fileID: 180012132}
   HeadTarget: {fileID: 1410612367}
   StunnedAnimation: {fileID: 576856593}
-  KickInput: 32
   PleaseStop: 0
 --- !u!65 &1561964691
 BoxCollider:

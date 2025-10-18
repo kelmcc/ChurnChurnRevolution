@@ -12,7 +12,7 @@ public class FallingCowSpawner : MonoBehaviour
     [SerializeField] private Vector3 minBounds = new Vector3(-20f, -10f, -20f);
     [SerializeField] private Vector3 maxBounds = new Vector3(20f, 50f, 20f);
     
-    private float _timer;
+    private float _timer = 0.5f;
     private readonly List<GameObject> _spawnedCows = new List<GameObject>();
 
     private void Update()

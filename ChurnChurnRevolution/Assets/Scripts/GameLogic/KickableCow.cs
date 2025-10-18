@@ -77,6 +77,7 @@ public class KickableCow : MonoBehaviour
             _rigidbody = gameObject.AddComponent<Rigidbody>();
         }
 
+        _sfx.Play();
         _rigidbody.isKinematic = false;
         Vector3 randomDir = new Vector3(UnityEngine.Random.Range(-1f, 1f), 1f, UnityEngine.Random.Range(-1f, 1f)).normalized;
         _rigidbody.AddForce(randomDir * flingForce, ForceMode.Impulse);
