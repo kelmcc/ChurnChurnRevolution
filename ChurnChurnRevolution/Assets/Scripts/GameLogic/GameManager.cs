@@ -89,7 +89,6 @@ public class GameManager : MonoBehaviour
     {
         _winningPlayer.ShowWinState();
         StartCoroutine(PlayWin());
-        Time.timeScale = 0f;
 
         _transitions.OnTransInComplete += () =>
         {

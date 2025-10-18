@@ -5332,6 +5332,54 @@ PrefabInstance:
       propertyPath: _allowEarlySkip
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2783664973845408657, guid: 5d5a6fd22958c40daa79ae24bd63d00b, type: 3}
+      propertyPath: _discoBallEscalation.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2783664973845408657, guid: 5d5a6fd22958c40daa79ae24bd63d00b, type: 3}
+      propertyPath: _discoLightsEscalation.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2783664973845408657, guid: 5d5a6fd22958c40daa79ae24bd63d00b, type: 3}
+      propertyPath: '_discoBallEscalation.Array.data[0]'
+      value: 
+      objectReference: {fileID: 7290399489346035552}
+    - target: {fileID: 2783664973845408657, guid: 5d5a6fd22958c40daa79ae24bd63d00b, type: 3}
+      propertyPath: '_discoBallEscalation.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1200533573763231491}
+    - target: {fileID: 2783664973845408657, guid: 5d5a6fd22958c40daa79ae24bd63d00b, type: 3}
+      propertyPath: '_discoBallEscalation.Array.data[2]'
+      value: 
+      objectReference: {fileID: 6728313431822802244}
+    - target: {fileID: 2783664973845408657, guid: 5d5a6fd22958c40daa79ae24bd63d00b, type: 3}
+      propertyPath: '_discoBallEscalation.Array.data[3]'
+      value: 
+      objectReference: {fileID: 7006353452917034807}
+    - target: {fileID: 2783664973845408657, guid: 5d5a6fd22958c40daa79ae24bd63d00b, type: 3}
+      propertyPath: '_discoBallEscalation.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8481227718435465581}
+    - target: {fileID: 2783664973845408657, guid: 5d5a6fd22958c40daa79ae24bd63d00b, type: 3}
+      propertyPath: '_discoBallEscalation.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8678626262304125352}
+    - target: {fileID: 2783664973845408657, guid: 5d5a6fd22958c40daa79ae24bd63d00b, type: 3}
+      propertyPath: '_discoLightsEscalation.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3654061206581744711}
+    - target: {fileID: 2783664973845408657, guid: 5d5a6fd22958c40daa79ae24bd63d00b, type: 3}
+      propertyPath: '_discoLightsEscalation.Array.data[1]'
+      value: 
+      objectReference: {fileID: 3091262821835585251}
+    - target: {fileID: 2783664973845408657, guid: 5d5a6fd22958c40daa79ae24bd63d00b, type: 3}
+      propertyPath: '_discoLightsEscalation.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1943461337825653348}
+    - target: {fileID: 2783664973845408657, guid: 5d5a6fd22958c40daa79ae24bd63d00b, type: 3}
+      propertyPath: '_discoLightsEscalation.Array.data[3]'
+      value: 
+      objectReference: {fileID: 6408263667744849759}
     - target: {fileID: 2960344654915071863, guid: 5d5a6fd22958c40daa79ae24bd63d00b, type: 3}
       propertyPath: m_Name
       value: Win

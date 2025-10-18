@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using SoundManager;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class WinLogic : MonoBehaviour
 {
@@ -14,18 +13,40 @@ public class WinLogic : MonoBehaviour
     [Header("Sequence Settings")] 
     [SerializeField] private float _returnToTitleDelay = 10f;
     [SerializeField] private bool _allowEarlySkip = true;
-    
-    // incrementally turn on balls and lights over time
-    // first play for x period and then start turning on balls and lights
+
+    [Header("Escalation Settings")]
+    [SerializeField] private float _escalationStartDelay = 2f;
+    [SerializeField] private float _escalationInterval = 1f;
     [SerializeField] private List<GameObject> _discoBallEscalation = new List<GameObject>();
     [SerializeField] private List<GameObject> _discoLightsEscalation = new List<GameObject>();
 
+    [SerializeField] private CanvasGroup _character;
+    
     private float _timer;
+    private float _escalationTimer;
+    private int _escalationIndex = 0;
     private bool _returnTriggered;
+    private bool _escalationStarted;
 
     private void Awake()
     {
         _timer = _returnToTitleDelay;
+        _escalationTimer = _escalationStartDelay;
+
+        foreach (var ball in _discoBallEscalation)
+        {
+            if (ball != null)
+            {
+                ball.SetActive(false);
+            }
+        }
+        foreach (var light in _discoLightsEscalation)
+        {
+            if (light != null)
+            {
+                light.SetActive(false);
+            }
+        }
     }
 
     private void Start()
@@ -58,11 +79,44 @@ public class WinLogic : MonoBehaviour
         {
             ReturnToTitle();
         }
+
+        HandleEscalation();
+    }
+
+    private void HandleEscalation()
+    {
+        if (!_escalationStarted)
+        {
+            _escalationTimer -= Time.deltaTime;
+            if (_escalationTimer <= 0f)
+            {
+                _escalationStarted = true;
+                _escalationTimer = _escalationInterval;
+            }
+            return;
+        }
+
+        _escalationTimer -= Time.deltaTime;
+        if (_escalationTimer <= 0f && _escalationIndex < Mathf.Max(_discoBallEscalation.Count, _discoLightsEscalation.Count))
+        {
+            if (_escalationIndex < _discoBallEscalation.Count && _discoBallEscalation[_escalationIndex] != null)
+            {
+                _discoBallEscalation[_escalationIndex].SetActive(true);
+            }
+
+            if (_escalationIndex < _discoLightsEscalation.Count && _discoLightsEscalation[_escalationIndex] != null)
+            {
+                _discoLightsEscalation[_escalationIndex].SetActive(true);
+            }
+
+            _escalationIndex++;
+            _escalationTimer = _escalationInterval;
+        }
     }
 
     private bool CheckForSkipInput()
     {
-        if (Input.anyKeyDown)
+        if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
         {
             return true;
         }
