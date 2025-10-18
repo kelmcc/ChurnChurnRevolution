@@ -23,6 +23,11 @@ public class StartScreen : MonoBehaviour
 
     private void Update()
     {
+        HandleInputs();
+    }
+
+    private void HandleInputs()
+    {
         bool inputStarted = false;
 
         foreach (var key in MovementKeys)
