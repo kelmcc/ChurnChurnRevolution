@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         Joystick p1Joystick = joysticks.Count > 1 ? joysticks[1] : null;
         KeyCode p1Kick = KeyCode.Mouse0;
 
+        Debug.Log($"p1Joystick deviceId {p1Joystick?.deviceId}\np2Joystick {p2Joystick?.deviceId}");
         _player1.Initialize(
             _playerConfig,
             new KeyCode[] { KeyCode.D, KeyCode.W, KeyCode.A, KeyCode.S }, p1Kick,
@@ -71,14 +72,12 @@ public class GameManager : MonoBehaviour
 
         if (_player1.HasWon)
         {
-            _player1.PleaseStop = true;
             Debug.Log("Player 1 Wins!");
             _winningPlayer = _player1;
             TriggerWinUI();
         }
         else if (_player2.HasWon)
         {
-            _player2.PleaseStop = true;
             Debug.Log("Player 2 Wins!");
             _winningPlayer = _player2;
             TriggerWinUI();
@@ -87,12 +86,14 @@ public class GameManager : MonoBehaviour
 
     private void TriggerWinUI()
     {
+        _player1.PleaseStop = true;
+        _player2.PleaseStop = true;
+
         _winningPlayer.ShowWinState();
         StartCoroutine(PlayWin());
 
         _transitions.OnTransInComplete += () =>
         {
-            // load player's winning scene
             SceneManager.LoadScene(WinnerSceneIndex);
         };
     }

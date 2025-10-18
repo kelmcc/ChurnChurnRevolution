@@ -9,24 +9,28 @@ public class WinLogic : MonoBehaviour
     [Header("Audio")] 
     [SerializeField] private EffectSoundBank _winMusic;
     [SerializeField] private EffectSoundBank _sfxMusic;
-    
+
     [Header("Sequence Settings")] 
     [SerializeField] private float _returnToTitleDelay = 10f;
     [SerializeField] private bool _allowEarlySkip = true;
 
-    [Header("Escalation Settings")]
+    [Header("Escalation Settings")] 
     [SerializeField] private float _escalationStartDelay = 2f;
     [SerializeField] private float _escalationInterval = 1f;
     [SerializeField] private List<GameObject> _discoBallEscalation = new List<GameObject>();
     [SerializeField] private List<GameObject> _discoLightsEscalation = new List<GameObject>();
 
+    [Header("Character Blink")] 
     [SerializeField] private CanvasGroup _character;
-    
+    [SerializeField] private float _characterBlinkInDelay = 0f;
+    [SerializeField] private float _characterBlinkDuration = 0.2f;
+
     private float _timer;
     private float _escalationTimer;
     private int _escalationIndex = 0;
     private bool _returnTriggered;
     private bool _escalationStarted;
+    private bool _blinkTriggered;
 
     private void Awake()
     {
@@ -40,12 +44,19 @@ public class WinLogic : MonoBehaviour
                 ball.SetActive(false);
             }
         }
+
         foreach (var light in _discoLightsEscalation)
         {
             if (light != null)
             {
                 light.SetActive(false);
             }
+        }
+
+        if (_character != null)
+        {
+            _character.alpha = 0f;
+            _character.gameObject.SetActive(true);
         }
     }
 
@@ -59,6 +70,11 @@ public class WinLogic : MonoBehaviour
         if (_sfxMusic != null)
         {
             _sfxMusic.Play();
+        }
+
+        if (_character != null)
+        {
+            StartCoroutine(BlinkCharacterOn());
         }
     }
 
@@ -93,11 +109,13 @@ public class WinLogic : MonoBehaviour
                 _escalationStarted = true;
                 _escalationTimer = _escalationInterval;
             }
+
             return;
         }
 
         _escalationTimer -= Time.deltaTime;
-        if (_escalationTimer <= 0f && _escalationIndex < Mathf.Max(_discoBallEscalation.Count, _discoLightsEscalation.Count))
+        if (_escalationTimer <= 0f &&
+            _escalationIndex < Mathf.Max(_discoBallEscalation.Count, _discoLightsEscalation.Count))
         {
             if (_escalationIndex < _discoBallEscalation.Count && _discoBallEscalation[_escalationIndex] != null)
             {
@@ -112,6 +130,21 @@ public class WinLogic : MonoBehaviour
             _escalationIndex++;
             _escalationTimer = _escalationInterval;
         }
+    }
+
+    private System.Collections.IEnumerator BlinkCharacterOn()
+    {
+        yield return new WaitForSeconds(_characterBlinkInDelay);
+
+        float t = 0f;
+        while (t < _characterBlinkDuration)
+        {
+            t += Time.deltaTime;
+            _character.alpha = Mathf.Clamp01(t / _characterBlinkDuration);
+            yield return null;
+        }
+
+        _character.alpha = 1f;
     }
 
     private bool CheckForSkipInput()
