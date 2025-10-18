@@ -45,13 +45,14 @@ public class GameManager : MonoBehaviour
         
         var joysticks = Joystick.all;
 
-        // Safety check
-        Joystick p1Joystick = joysticks.Count > 0 ? joysticks[0] : null;
-        Joystick p2Joystick = joysticks.Count > 1 ? joysticks[1] : null;
+        Joystick p2Joystick = joysticks.Count > 0 ? joysticks[0] : null;
+        KeyCode p2Kick = KeyCode.Space;
+        Joystick p1Joystick = joysticks.Count > 1 ? joysticks[1] : null;
+        KeyCode p1Kick = KeyCode.Mouse0;
 
         _player1.Initialize(
             _playerConfig,
-            new KeyCode[] { KeyCode.D, KeyCode.W, KeyCode.A, KeyCode.S },
+            new KeyCode[] { KeyCode.D, KeyCode.W, KeyCode.A, KeyCode.S }, p1Kick,
             _player1ProgressBar,
             p1Joystick
         );
@@ -59,9 +60,11 @@ public class GameManager : MonoBehaviour
         _player2.Initialize(
             _playerConfig,
             new KeyCode[] { KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow },
+            p2Kick,
             _player2ProgressBar,
             p2Joystick
-        );    }
+        );    
+    }
 
     private void Update()
     {

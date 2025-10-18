@@ -7,6 +7,7 @@ public class StartScreen : MonoBehaviour
 {
     [SerializeField] private float _requiredTime = 2f;
     [SerializeField] private int _requiredKeyCount = 3;
+    [SerializeField] private Transitions _trans;
 
     private readonly HashSet<KeyCode> _pressedKeys = new HashSet<KeyCode>();
     private readonly HashSet<string> _joystickDirections = new HashSet<string>();

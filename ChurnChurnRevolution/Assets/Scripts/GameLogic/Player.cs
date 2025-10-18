@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject StunnedAnimation;
 
     private KeyCode[] inputChain;
-    public KeyCode KickInput = KeyCode.Space;
+    private KeyCode _kickInput;
     private Joystick _joystick;
     private int currentChainIndex;
     private Slider progressBar;
@@ -51,10 +51,11 @@ public class Player : MonoBehaviour
         public float KickTimeOutDuration = 1f;
     }
     
-    public void Initialize(PlayerConfig playerConfig, KeyCode[] chain, Slider assignedProgressBar, Joystick joystick)
+    public void Initialize(PlayerConfig playerConfig, KeyCode[] chain, KeyCode kickInput, Slider assignedProgressBar, Joystick joystick)
     {
         _config = playerConfig;
         _joystick = joystick;
+        _kickInput = kickInput;
         _kickCollider.enabled = false;
         _winState.SetActive(false);
 
@@ -142,7 +143,7 @@ public class Player : MonoBehaviour
         }
 
         // === Kick input ===
-        if (Input.GetKeyDown(KickInput) && !isKicking && currentKickTimeOut <= 0f)
+        if (Input.GetKeyDown(_kickInput) && !isKicking && currentKickTimeOut <= 0f)
         {
             StartKickAction();
         }
