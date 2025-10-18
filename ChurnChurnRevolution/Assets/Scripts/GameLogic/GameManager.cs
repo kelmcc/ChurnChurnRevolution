@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private WinLogic _winLogic;
     [SerializeField] private Transitions _transitions;
 
+    private Joystick _p2Joystick;
+    private Joystick _p1Joystick;
     private int WinnerSceneIndex => _player1.HasWon ? 2 : 3;
 
     private void Awake()
@@ -41,17 +43,17 @@ public class GameManager : MonoBehaviour
 
         var joysticks = Joystick.all;
 
-        Joystick p2Joystick = joysticks.Count > 0 ? joysticks[0] : null;
+        _p2Joystick = joysticks.Count > 0 ? joysticks[0] : null;
         KeyCode p2Kick = KeyCode.Space;
-        Joystick p1Joystick = joysticks.Count > 1 ? joysticks[1] : null;
+        _p1Joystick = joysticks.Count > 1 ? joysticks[1] : null;
         KeyCode p1Kick = KeyCode.Mouse0;
 
-        Debug.Log($"p1Joystick deviceId {p1Joystick?.deviceId}\np2Joystick {p2Joystick?.deviceId}");
+        Debug.Log($"p1Joystick deviceId {_p1Joystick?.deviceId}\np2Joystick {_p2Joystick?.deviceId}");
         _player1.Initialize(
             _playerConfig,
             new KeyCode[] { KeyCode.D, KeyCode.W, KeyCode.A, KeyCode.S }, p1Kick,
             _player1ProgressBar,
-            p1Joystick
+            _p1Joystick
         );
 
         _player2.Initialize(
@@ -59,12 +61,23 @@ public class GameManager : MonoBehaviour
             new KeyCode[] { KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow },
             p2Kick,
             _player2ProgressBar,
-            p2Joystick
+            _p2Joystick
         );    
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            (_p1Joystick, _p2Joystick) = (_p2Joystick, _p1Joystick);
+
+            // Update the players with the new joysticks
+            _player1.UpdateJoystick(_p1Joystick);
+            _player2.UpdateJoystick(_p2Joystick);
+
+            Debug.Log("Swapped joysticks between Player 1 and Player 2");
+        }
+        
         if (_winningPlayer != null)
         {
             return;
@@ -83,6 +96,7 @@ public class GameManager : MonoBehaviour
             TriggerWinUI();
         }
     }
+    
 
     private void TriggerWinUI()
     {

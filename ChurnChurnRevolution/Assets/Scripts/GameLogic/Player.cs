@@ -170,6 +170,11 @@ public class Player : MonoBehaviour
         isStunned = false;
         StunnedAnimation.SetActive(false);
     }
+
+    public void UpdateJoystick(Joystick newJoy)
+    {
+        _joystick = newJoy;
+    }
     
     private void UpdateStunState()
     {
