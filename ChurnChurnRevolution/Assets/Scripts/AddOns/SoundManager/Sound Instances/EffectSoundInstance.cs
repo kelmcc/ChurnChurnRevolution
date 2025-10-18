@@ -93,7 +93,7 @@ namespace SoundManager
 
             _audioSource.Stop();
             _audioSource.clip = null;
-            _audioSource.time = 0f;
+            //_audioSource.time = 0f;
             _audioSource.playOnAwake = false;
             _audioSource.volume = 0.5f;
             _audioSource.pitch = 1f;

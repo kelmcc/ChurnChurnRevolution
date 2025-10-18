@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class FallingCowSpawner : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    [SerializeField] private GameObject cowPrefab;
+    [SerializeField] private List<GameObject> itemsToSpawn;
     [SerializeField] private float spawnInterval = 2f;
     [SerializeField] private Vector3 spawnAreaSize = new Vector3(5f, 0f, 5f);
 
@@ -40,7 +40,8 @@ public class FallingCowSpawner : MonoBehaviour
         );
 
         Vector3 spawnPos = transform.position + randomOffset;
-        GameObject cow = Instantiate(cowPrefab, spawnPos, Quaternion.identity, transform);
+        GameObject itemToSpawn = itemsToSpawn[Random.Range(0, itemsToSpawn.Count)];
+        GameObject cow = Instantiate(itemToSpawn, spawnPos, Quaternion.identity, transform);
         _spawnedCows.Add(cow);
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using SoundManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -18,17 +19,17 @@ public class GameManager : MonoBehaviour
 
     private Player _winningPlayer = null;
 
-    [SerializeField] private GameObject _winBG;
-    [SerializeField] private GameObject _win1;
-    [SerializeField] private GameObject _win2;
-    [SerializeField] private GameObject _win3;
-    
+    [SerializeField] private WinLogic _winLogic;
     [SerializeField] private Transitions _transitions;
+
+    private int WinnerSceneIndex => _player1.HasWon ? 2 : 3;
 
     private void Awake()
     {
-        _transitions.OnTransOutComplete += () => { Debug.LogError("Trans out Complete");};
-        _transitions.OnTransInComplete += () => { Debug.LogError("Trans in Complete");};
+        _transitions.OnTransOutComplete += () =>
+        {
+            // do something at the start
+        };
     }
 
     private void Start()
@@ -38,11 +39,6 @@ public class GameManager : MonoBehaviour
         EffectSoundInstance instance = _music.Play();
         instance.IsLooping = true;
 
-        _winBG.SetActive(false);
-        _win1.SetActive(false);
-        _win2.SetActive(false);
-        _win3.SetActive(false);
-        
         var joysticks = Joystick.all;
 
         Joystick p2Joystick = joysticks.Count > 0 ? joysticks[0] : null;
@@ -77,7 +73,6 @@ public class GameManager : MonoBehaviour
         {
             _player1.PleaseStop = true;
             Debug.Log("Player 1 Wins!");
-            //Time.timeScale = 0f;
             _winningPlayer = _player1;
             TriggerWinUI();
         }
@@ -85,7 +80,6 @@ public class GameManager : MonoBehaviour
         {
             _player2.PleaseStop = true;
             Debug.Log("Player 2 Wins!");
-            //Time.timeScale = 0f;
             _winningPlayer = _player2;
             TriggerWinUI();
         }
@@ -95,23 +89,20 @@ public class GameManager : MonoBehaviour
     {
         _winningPlayer.ShowWinState();
         StartCoroutine(PlayWin());
+        Time.timeScale = 0f;
+
+        _transitions.OnTransInComplete += () =>
+        {
+            // load player's winning scene
+            SceneManager.LoadScene(WinnerSceneIndex);
+        };
     }
 
     private IEnumerator PlayWin()
     {
-        _winBG.SetActive(true);
-        
-        _win1.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        _transitions.TransitionIn();
 
-        yield return new WaitForSeconds(2f);
-
-        _win1.SetActive(false);
-        _win2.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        
-        _win2.SetActive(false);
-        _win3.SetActive(true);
-        Time.timeScale = 0f;
         yield return null;
     }
 }
