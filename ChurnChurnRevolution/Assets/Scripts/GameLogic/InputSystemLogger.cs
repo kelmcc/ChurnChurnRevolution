@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputSystemLogger : MonoBehaviour
 {
@@ -13,6 +14,22 @@ public class InputSystemLogger : MonoBehaviour
             }
         }
 
+        for (int i = 0; i <= 19; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.JoystickButton0 + i))
+            {
+                Debug.Log($"Joystick Button {i} pressed");
+            }
+        }
+
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        if (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f)
+        {
+            Debug.Log($"Axis Movement: H={horizontal} V={vertical}");
+        }
+        
         /*
         // Log mouse clicks
         if (Input.GetMouseButtonDown(0))

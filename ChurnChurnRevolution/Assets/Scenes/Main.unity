@@ -374,7 +374,7 @@ MonoBehaviour:
   _opponent: {fileID: 1561964690}
   HeadTarget: {fileID: 1748258445}
   PleaseStop: 0
-  kickInput: 101
+  kickInput: 323
   kickDuration: 0.2
   kickTimeOutDuration: 1
 --- !u!65 &180012133
