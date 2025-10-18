@@ -170,7 +170,7 @@ MonoBehaviour:
       m_RotationOrder: 4
   _volumeRange:
     _min: 0.5
-    _max: 0.5
+    _max: 0.8
   _pitchRange:
     _min: 1
     _max: 1

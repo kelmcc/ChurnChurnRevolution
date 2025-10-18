@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor.Animations;
 
 public class Transitions : MonoBehaviour
 {
@@ -19,7 +18,8 @@ public class Transitions : MonoBehaviour
     public Action OnTransInComplete;
     public Action OnTransOutComplete;
 
-    private AnimatorController _runtimeController;
+    private AnimatorOverrideController _runtimeOverrideController;
+    private RuntimeAnimatorController _baseController;
 
     private const string TransInState = "TransIn";
     private const string TransOutState = "TransOut";
@@ -28,44 +28,51 @@ public class Transitions : MonoBehaviour
 
     private void Awake()
     {
-        _image.enabled = false;
+        _image.enabled = true;
         SetupRuntimeAnimatorController();
+
+        if (_transIdleOutAnim != null)
+        {
+            _animator.Play(IdleOutState, 0, 0f);
+        }
+        else
+        {
+            _image.enabled = false;
+        }
     }
 
     private void SetupRuntimeAnimatorController()
     {
-        _runtimeController = AnimatorController.CreateAnimatorControllerAtPath("Assets/Temp_TransitionController.controller");
-        AnimatorStateMachine stateMachine = _runtimeController.layers[0].stateMachine;
+        _baseController = _animator.runtimeAnimatorController;
+
+        if (_baseController == null)
+        {
+            Debug.LogWarning("Animator does not have a base controller assigned. Transitions will not play.");
+            return;
+        }
+
+        _runtimeOverrideController = new AnimatorOverrideController(_baseController);
+        _animator.runtimeAnimatorController = _runtimeOverrideController;
 
         if (_transInAnim != null)
         {
-            AnimatorState state = stateMachine.AddState(TransInState);
-            state.motion = _transInAnim;
+            _runtimeOverrideController[TransInState] = _transInAnim;
         }
 
         if (_transOutAnim != null)
         {
-            AnimatorState state = stateMachine.AddState(TransOutState);
-            state.motion = _transOutAnim;
+            _runtimeOverrideController[TransOutState] = _transOutAnim;
         }
 
         if (_transIdleInAnim != null)
         {
-            AnimatorState state = stateMachine.AddState(IdleInState);
-            state.motion = _transIdleInAnim;
-            state.speed = 1f;
-            state.writeDefaultValues = true;
+            _runtimeOverrideController[IdleInState] = _transIdleInAnim;
         }
 
         if (_transIdleOutAnim != null)
         {
-            AnimatorState state = stateMachine.AddState(IdleOutState);
-            state.motion = _transIdleOutAnim;
-            state.speed = 1f;
-            state.writeDefaultValues = true;
+            _runtimeOverrideController[IdleOutState] = _transIdleOutAnim;
         }
-
-        _animator.runtimeAnimatorController = _runtimeController;
     }
 
     public void TransitionIn()
@@ -93,7 +100,6 @@ public class Transitions : MonoBehaviour
     public void TriggerTransInComplete()
     {
         OnTransInComplete?.Invoke();
-
         if (_transIdleInAnim != null)
         {
             _animator.Play(IdleInState, 0, 0);
@@ -108,7 +114,6 @@ public class Transitions : MonoBehaviour
     public void TriggerTransOutComplete()
     {
         OnTransOutComplete?.Invoke();
-
         if (_transIdleOutAnim != null)
         {
             _animator.Play(IdleOutState, 0, 0);

@@ -1,10 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using SoundManager;
 
 public class StartScreen : MonoBehaviour
 {
+    [SerializeField] private EffectSoundBank _music;
+
     [SerializeField] private float _requiredTime = 2f;
     [SerializeField] private int _requiredKeyCount = 3;
     [SerializeField] private Transitions _trans;
@@ -13,6 +17,7 @@ public class StartScreen : MonoBehaviour
     private readonly HashSet<string> _joystickDirections = new HashSet<string>();
 
     private float _timer;
+    private bool _isTransing = false;
 
     private static readonly KeyCode[] MovementKeys =
     {
@@ -21,6 +26,11 @@ public class StartScreen : MonoBehaviour
     };
 
     private const float JoystickThreshold = 0.5f;
+
+    private void Start()
+    {
+        _music.Play();
+    }
 
     private void Update()
     {
@@ -86,6 +96,13 @@ public class StartScreen : MonoBehaviour
 
     private void LoadNextScene()
     {
-        SceneManager.LoadScene(1);
+        if (_isTransing)
+        {
+            return;
+        }
+
+        _isTransing = true;
+        _trans.OnTransInComplete += () => { SceneManager.LoadScene(1); };
+        _trans.TransitionIn();
     }
 }
