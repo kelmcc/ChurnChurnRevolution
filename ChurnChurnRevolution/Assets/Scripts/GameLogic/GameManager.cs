@@ -1,6 +1,7 @@
 using System.Collections;
 using SoundManager;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -42,19 +43,25 @@ public class GameManager : MonoBehaviour
         _win2.SetActive(false);
         _win3.SetActive(false);
         
-        // We need to consider that we have two horizontal and vertical inputs
-        // and we want to be able to switch between the two
+        var joysticks = Joystick.all;
+
+        // Safety check
+        Joystick p1Joystick = joysticks.Count > 0 ? joysticks[0] : null;
+        Joystick p2Joystick = joysticks.Count > 1 ? joysticks[1] : null;
 
         _player1.Initialize(
             _playerConfig,
             new KeyCode[] { KeyCode.D, KeyCode.W, KeyCode.A, KeyCode.S },
-            _player1ProgressBar
+            _player1ProgressBar,
+            p1Joystick
         );
-        _player2.Initialize(_playerConfig,
+
+        _player2.Initialize(
+            _playerConfig,
             new KeyCode[] { KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow },
-            _player2ProgressBar
-        );
-    }
+            _player2ProgressBar,
+            p2Joystick
+        );    }
 
     private void Update()
     {

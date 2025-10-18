@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using SoundManager;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
 
     private KeyCode[] inputChain;
     public KeyCode KickInput = KeyCode.Space;
+    private Joystick _joystick;
     private int currentChainIndex;
     private Slider progressBar;
 
@@ -49,9 +51,10 @@ public class Player : MonoBehaviour
         public float KickTimeOutDuration = 1f;
     }
     
-    public void Initialize(PlayerConfig playerConfig, KeyCode[] chain, Slider assignedProgressBar)
+    public void Initialize(PlayerConfig playerConfig, KeyCode[] chain, Slider assignedProgressBar, Joystick joystick)
     {
         _config = playerConfig;
+        _joystick = joystick;
         _kickCollider.enabled = false;
         _winState.SetActive(false);
 
@@ -98,7 +101,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        // Check input
+        // keyboard
         if (Input.GetKeyDown(inputChain[currentChainIndex]))
         {
             progress += fillAmount;
@@ -107,17 +110,49 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(inputChain[(currentChainIndex + inputChain.Length - 1) % inputChain.Length]))
         {
-            // Allow reverse order
             progress += fillAmount;
             currentChainIndex = (currentChainIndex + inputChain.Length - 1) % inputChain.Length;
             UpdateFX();
         }
 
-        // Check for kick input
+        // joystick
+        if (_joystick != null)
+        {
+            Vector2 stick = _joystick.stick.ReadValue();
+
+            if (stick.x > 0.5f && currentChainIndex == 0)
+            {
+                TriggerChainAdvance();
+            }
+
+            if (stick.y > 0.5f && currentChainIndex == 1)
+            {
+                TriggerChainAdvance();
+            }
+
+            if (stick.x < -0.5f && currentChainIndex == 2)
+            {
+                TriggerChainAdvance();
+            }
+
+            if (stick.y < -0.5f && currentChainIndex == 3)
+            {
+                TriggerChainAdvance();
+            }
+        }
+
+        // === Kick input ===
         if (Input.GetKeyDown(KickInput) && !isKicking && currentKickTimeOut <= 0f)
         {
             StartKickAction();
         }
+    }
+
+    private void TriggerChainAdvance()
+    {
+        progress += fillAmount;
+        currentChainIndex = (currentChainIndex + 1) % inputChain.Length;
+        UpdateFX();
     }
 
     private void Stun()

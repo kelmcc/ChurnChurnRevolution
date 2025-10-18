@@ -3,8 +3,31 @@ using UnityEngine.InputSystem;
 
 public class InputSystemLogger : MonoBehaviour
 {
+    public bool DebugInput = false;
+
+    private void Start()
+    {
+        if (!DebugInput)
+        {
+            return;
+        }
+
+        Debug.Log($"Input System active: {InputSystem.settings != null}");
+        Debug.Log($"Joystick connected: {Joystick.all.Count}");
+
+        foreach (var d in InputSystem.devices)
+        {
+            Debug.Log($"Device: {d.displayName}, Layout: {d.layout}, Type: {d.GetType().Name}");
+        }
+    }
+
     private void Update()
     {
+        if (!DebugInput)
+        {
+            return;
+        }
+
         // Log all keyboard input
         foreach (KeyCode keyCode in System.Enum.GetValues(typeof(KeyCode)))
         {
@@ -29,35 +52,34 @@ public class InputSystemLogger : MonoBehaviour
         {
             Debug.Log($"Axis Movement: H={horizontal} V={vertical}");
         }
+
+        foreach (var joy in Joystick.all)
+        {
+            Vector2 pos = joy.stick.ReadValue();
+            if (pos.magnitude > 0.1f)
+            {
+                Debug.Log($"{joy.displayName}{joy.deviceId}: {pos}");
+            }
+        }
+    }
+
+    private void OnEnable()
+    {
+        InputSystem.onDeviceChange += OnDeviceChange;
+    }
+
+    private void OnDisable()
+    {
+        InputSystem.onDeviceChange -= OnDeviceChange;
+    }
+
+    private void OnDeviceChange(InputDevice device, InputDeviceChange change)
+    {
+        if (!DebugInput)
+        {
+            return;
+        }
         
-        /*
-        // Log mouse clicks
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Mouse Button: Left Click");
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            Debug.Log("Mouse Button: Right Click");
-        }
-        if (Input.GetMouseButtonDown(2))
-        {
-            Debug.Log("Mouse Button: Middle Click");
-        }
-
-        // Log mouse movement
-        Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        if (mouseDelta != Vector2.zero)
-        {
-            Debug.Log($"Mouse Moved: {mouseDelta}");
-        }
-
-        // Log scroll wheel
-        float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
-        if (Mathf.Abs(scrollWheel) > 0.01f)
-        {
-            Debug.Log($"Mouse Scroll: {scrollWheel}");
-        }
-    */
+        Debug.Log($"Device change: {device.displayName} - {change}");
     }
 }
