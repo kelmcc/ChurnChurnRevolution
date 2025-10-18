@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
 public class StartScreen : MonoBehaviour
@@ -8,6 +9,8 @@ public class StartScreen : MonoBehaviour
     [SerializeField] private int _requiredKeyCount = 3;
 
     private readonly HashSet<KeyCode> _pressedKeys = new HashSet<KeyCode>();
+    private readonly HashSet<string> _joystickDirections = new HashSet<string>();
+
     private float _timer;
 
     private static readonly KeyCode[] MovementKeys =
@@ -16,31 +19,60 @@ public class StartScreen : MonoBehaviour
         KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.RightArrow
     };
 
+    private const float JoystickThreshold = 0.5f;
+
     private void Update()
     {
+        bool inputStarted = false;
+
         foreach (var key in MovementKeys)
         {
             if (Input.GetKeyDown(key))
             {
-                if (_pressedKeys.Count == 0)
-                {
+                if (_pressedKeys.Count == 0 && _joystickDirections.Count == 0)
                     _timer = _requiredTime;
-                }
 
                 _pressedKeys.Add(key);
             }
         }
 
-        if (_pressedKeys.Count > 0)
+        foreach (var joy in Joystick.all)
+        {
+            Vector2 stick = joy.stick.ReadValue();
+
+            if (stick.x > JoystickThreshold)
+            {
+                if (_pressedKeys.Count == 0 && _joystickDirections.Count == 0)
+                    _timer = _requiredTime;
+
+                _joystickDirections.Add($"{joy.deviceId}_Right");
+            }
+            else if (stick.x < -JoystickThreshold)
+            {
+                _joystickDirections.Add($"{joy.deviceId}_Left");
+            }
+
+            if (stick.y > JoystickThreshold)
+            {
+                _joystickDirections.Add($"{joy.deviceId}_Up");
+            }
+            else if (stick.y < -JoystickThreshold)
+            {
+                _joystickDirections.Add($"{joy.deviceId}_Down");
+            }
+        }
+
+        if (_pressedKeys.Count > 0 || _joystickDirections.Count > 0)
         {
             _timer -= Time.deltaTime;
             if (_timer <= 0f)
             {
                 _pressedKeys.Clear();
+                _joystickDirections.Clear();
             }
         }
 
-        if (_pressedKeys.Count >= _requiredKeyCount)
+        if (_pressedKeys.Count + _joystickDirections.Count >= _requiredKeyCount)
         {
             LoadNextScene();
         }
