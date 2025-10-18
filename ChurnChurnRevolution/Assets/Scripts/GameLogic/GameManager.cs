@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Slider _player1ProgressBar;
     [SerializeField] private Slider _player2ProgressBar;
+    
+    [SerializeField] private Player.PlayerConfig _playerConfig;
 
     private Player _winningPlayer = null;
 
@@ -39,12 +41,16 @@ public class GameManager : MonoBehaviour
         _win1.SetActive(false);
         _win2.SetActive(false);
         _win3.SetActive(false);
+        
+        // We need to consider that we have two horizontal and vertical inputs
+        // and we want to be able to switch between the two
 
         _player1.Initialize(
+            _playerConfig,
             new KeyCode[] { KeyCode.D, KeyCode.W, KeyCode.A, KeyCode.S },
             _player1ProgressBar
         );
-        _player2.Initialize(
+        _player2.Initialize(_playerConfig,
             new KeyCode[] { KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow },
             _player2ProgressBar
         );

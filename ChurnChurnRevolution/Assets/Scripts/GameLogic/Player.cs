@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using SoundManager;
 using UnityEngine;
@@ -17,8 +18,10 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _winState;
     [SerializeField] private Player _opponent;
     public Transform HeadTarget;
+    [SerializeField] private GameObject StunnedAnimation;
 
     private KeyCode[] inputChain;
+    public KeyCode KickInput = KeyCode.Space;
     private int currentChainIndex;
     private Slider progressBar;
 
@@ -29,16 +32,26 @@ public class Player : MonoBehaviour
     public bool HasWon => progress >= 1f;
     public bool PleaseStop = false;
 
-    [SerializeField] private KeyCode kickInput = KeyCode.Space;
-    [SerializeField] private float kickDuration = 0.2f;
-    [SerializeField] private float kickTimeOutDuration = 1f;
-
+    private PlayerConfig _config;
+    
     private bool isKicking;
     private float currentKickTimeOut;
     private float currentKickingTimer;
 
-    public void Initialize(KeyCode[] chain, Slider assignedProgressBar)
+    private bool isStunned;
+    private float currentStunTimer;
+
+    [Serializable]
+    public class PlayerConfig
     {
+        public float StunDuration = 0.5f;
+        public float KickDuration = 0.2f;
+        public float KickTimeOutDuration = 1f;
+    }
+    
+    public void Initialize(PlayerConfig playerConfig, KeyCode[] chain, Slider assignedProgressBar)
+    {
+        _config = playerConfig;
         _kickCollider.enabled = false;
         _winState.SetActive(false);
 
@@ -75,11 +88,12 @@ public class Player : MonoBehaviour
         UpdateProgressBar();
         UpdateButterSplash();
         UpdateKickState();
+        UpdateStunState();
     }
 
     private void HandleInput()
     {
-        if (inputChain == null || inputChain.Length == 0)
+        if (inputChain == null || inputChain.Length == 0 || isStunned)
         {
             return;
         }
@@ -100,9 +114,34 @@ public class Player : MonoBehaviour
         }
 
         // Check for kick input
-        if (Input.GetKeyDown(kickInput) && !isKicking && currentKickTimeOut <= 0f)
+        if (Input.GetKeyDown(KickInput) && !isKicking && currentKickTimeOut <= 0f)
         {
             StartKickAction();
+        }
+    }
+
+    private void Stun()
+    {
+        isStunned = true;
+        currentStunTimer = _config.StunDuration;
+        StunnedAnimation.SetActive(true);
+    }
+    
+    private void TurnOffStun()
+    {
+        isStunned = false;
+        StunnedAnimation.SetActive(false);
+    }
+    
+    private void UpdateStunState()
+    {
+        if (isStunned)
+        {
+            currentStunTimer -= Time.deltaTime;
+            if (currentStunTimer <= 0f)
+            {
+                TurnOffStun();
+            }
         }
     }
 
@@ -155,7 +194,7 @@ public class Player : MonoBehaviour
     public void StartKickAction()
     {
         _bodyImage.sprite = _kickSprite;
-        currentKickingTimer = kickDuration;
+        currentKickingTimer = _config.KickDuration;
         isKicking = true;
 
         _kickCollider.enabled = true;
@@ -177,7 +216,7 @@ public class Player : MonoBehaviour
             {
                 isKicking = false;
                 TurnOffKick();
-                currentKickTimeOut = kickTimeOutDuration;
+                currentKickTimeOut = _config.KickTimeOutDuration;
             }
         }
         else if (currentKickTimeOut > 0f)
@@ -198,10 +237,13 @@ public class Player : MonoBehaviour
             Debug.Log($"Kicked object: {other.name}");
             _kickSfx.Play();
 
-            IKickable kickable = other.GetComponent<IKickable>();
+            KickableCow kickable = other.GetComponent<KickableCow>();
             if (kickable != null)
             {
-                
+                kickable.OnCowReachingTarget += (player) =>
+                {
+                    player.Stun();
+                };
                 kickable.OnKicked(_opponent);
             }
 

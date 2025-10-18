@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
-public class KickableCow : MonoBehaviour, IKickable
+public class KickableCow : MonoBehaviour
 {
     [Header("Visuals")]
     [SerializeField] private Image _image;
@@ -39,6 +39,7 @@ public class KickableCow : MonoBehaviour, IKickable
         _kickTo = targetPlayer.HeadTarget;
         _isFlyingAway = false;
         _sfx.Play();
+        _rigidbody.linearDamping = 0;
         
         if (_rigidbody != null)
         {
@@ -53,13 +54,11 @@ public class KickableCow : MonoBehaviour, IKickable
             return;
         }
 
-        // Move toward the kick target
         Vector3 direction = (_kickTo.position - transform.position).normalized;
         float distance = Vector3.Distance(transform.position, _kickTo.position);
 
         transform.position += direction * moveSpeed * Time.deltaTime;
 
-        // Reached target
         if (distance <= reachThreshold)
         {
             Debug.Log("Cow reached player!");
@@ -82,9 +81,4 @@ public class KickableCow : MonoBehaviour, IKickable
         Vector3 randomDir = new Vector3(UnityEngine.Random.Range(-1f, 1f), 1f, UnityEngine.Random.Range(-1f, 1f)).normalized;
         _rigidbody.AddForce(randomDir * flingForce, ForceMode.Impulse);
     }
-}
-
-public interface IKickable
-{
-    void OnKicked(Player targetPlayer);
 }
