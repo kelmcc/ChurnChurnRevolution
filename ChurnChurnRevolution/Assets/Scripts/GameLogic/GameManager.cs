@@ -43,9 +43,9 @@ public class GameManager : MonoBehaviour
 
         var joysticks = Joystick.all;
 
-        _p2Joystick = joysticks.Count > 0 ? joysticks[0] : null;
+        _p2Joystick = joysticks.Count > 0 ? joysticks[ControlConstant.Instance.Player2Joy] : null;
+        _p1Joystick = joysticks.Count > 1 ? joysticks[ControlConstant.Instance.Player1Joy] : null;
         KeyCode p2Kick = KeyCode.Space;
-        _p1Joystick = joysticks.Count > 1 ? joysticks[1] : null;
         KeyCode p1Kick = KeyCode.Mouse0;
 
         Debug.Log($"p1Joystick deviceId {_p1Joystick?.deviceId}\np2Joystick {_p2Joystick?.deviceId}");
@@ -69,7 +69,11 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            (_p1Joystick, _p2Joystick) = (_p2Joystick, _p1Joystick);
+            ControlConstant.Instance.SwitchInputs();
+            var joysticks = Joystick.all;
+
+            _p2Joystick = joysticks.Count > 0 ? joysticks[ControlConstant.Instance.Player2Joy] : null;
+            _p1Joystick = joysticks.Count > 1 ? joysticks[ControlConstant.Instance.Player1Joy] : null;
 
             // Update the players with the new joysticks
             _player1.UpdateJoystick(_p1Joystick);
